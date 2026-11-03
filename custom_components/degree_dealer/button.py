@@ -8,6 +8,9 @@ from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from . import DegreeDealerConfigEntry
 from .entity import DegreeDealerEntity
 
+# the entities read the coordinator's data and change only the integration's own settings
+PARALLEL_UPDATES = 0
+
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: DegreeDealerConfigEntry, async_add_entities: AddConfigEntryEntitiesCallback

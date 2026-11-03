@@ -47,6 +47,15 @@ alongside implementing the request. Point out assumptions that look wrong.
   and test that a read-only user gets `Unauthorized`. When the README gets
   install steps, lead with searching for Degree Dealer in HACS and keep
   "custom repository" as a fallback.
+- Home Assistant quality scale: follow the
+  [rules](https://contributors.home-assistant.io/core/quality-scale/rules/)
+  where they fit. In place: `PARALLEL_UPDATES = 0` in every platform,
+  `diagnostics.py` (area ids and names become `room_<n>` everywhere). For new
+  actions: register them in `async_setup`, raise errors with
+  `translation_domain`/`translation_key` from the `exceptions` section of
+  `strings.json` in every language. Still missing before a HACS submission:
+  `custom_components/degree_dealer/brand/icon.png`, the HACS and hassfest
+  workflows, and README install and removal sections.
 - Learning must go through `coordinator.snapshot()` + `coordinator.learn()`, so the
   history replay (history.py) and the live updates learn the same way.
 - Control modes: `return` (directly connected district heating, only a return limit

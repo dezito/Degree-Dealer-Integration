@@ -17,6 +17,9 @@ from .const import CONF_CONTROL_MODE, CONTROL_RETURN, CONTROL_SUPPLY
 from .coordinator import DegreeDealerCoordinator, DegreeDealerData
 from .entity import DegreeDealerEntity
 
+# the entities read the coordinator's data and change only the integration's own settings
+PARALLEL_UPDATES = 0
+
 
 def _round(value: float | None, digits: int = 1) -> float | None:
     return None if value is None else round(value, digits)

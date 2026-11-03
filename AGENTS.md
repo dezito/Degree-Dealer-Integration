@@ -36,6 +36,17 @@ alongside implementing the request. Point out assumptions that look wrong.
   together and keep the keys identical.
 - When the dashboard changes, check that each section's "Read more" text
   (`help_*` in `texts/`) still covers the entities and functions shown in it.
+- HACS review requirements (raised for the sister projects): never write the
+  user's own configuration (`automations.yaml`, `scripts.yaml`,
+  `configuration.yaml`, any YAML the user edits), not even from a repair; keep
+  blueprints backward compatible and raise a repair when the user must act.
+  Check changes in ha-dev too and read its log for `Detected blocking call`;
+  fakes of Home Assistant objects in tests must match the real data.
+  Register services that replace/delete stored data or change config entries
+  or options with `homeassistant.helpers.service.async_register_admin_service`
+  and test that a read-only user gets `Unauthorized`. When the README gets
+  install steps, lead with searching for Degree Dealer in HACS and keep
+  "custom repository" as a fallback.
 - Learning must go through `coordinator.snapshot()` + `coordinator.learn()`, so the
   history replay (history.py) and the live updates learn the same way.
 - Control modes: `return` (directly connected district heating, only a return limit

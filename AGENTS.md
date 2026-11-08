@@ -56,6 +56,17 @@ alongside implementing the request. Point out assumptions that look wrong.
   `strings.json` in every language. Still missing before a HACS submission:
   `custom_components/degree_dealer/brand/icon.png`, the HACS and hassfest
   workflows, and README install and removal sections.
+- Releases: `hacs.json` has `zip_release` with `filename: degree_dealer.zip`,
+  so HACS installs from that release asset (its download count is the install
+  count). `.github/workflows/release.yml` builds it from
+  `custom_components/degree_dealer/` (files at the zip root) when a release is
+  published; run it by hand with a tag for a release that lacks the zip. It
+  sets `manifest.json` `version` in the zip from the tag (`v0.1.0` -> `0.1.0`)
+  after `.github/check_version.py` has rejected versions Home Assistant won't
+  load. Same workflow as the sister projects; keep them in sync.
+  When Degree Dealer shows up in
+  `https://analytics.home-assistant.io/custom_integrations.json`, add the
+  Installations badge to the README like the sister projects.
 - Learning must go through `coordinator.snapshot()` + `coordinator.learn()`, so the
   history replay (history.py) and the live updates learn the same way.
 - Control modes: `return` (directly connected district heating, only a return limit

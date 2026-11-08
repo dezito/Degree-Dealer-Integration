@@ -1,0 +1,49 @@
+name: Release
+
+# Builds custom_components/<domain> into <domain>.zip and attaches it to the
+# release. hacs.json has zip_release, so HACS installs from this asset and the
+# release page shows its download count.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag to attach the zip to (e.g. v0.1.0)
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    env:
+      DOMAIN: degree_dealer
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag }}
+
+      - name: Set manifest version from the tag
+        run: |
+          version="${TAG#v}"
+          python3 -m pip install --quiet awesomeversion
+          python3 .github/check_version.py "$version"
+          manifest="custom_components/$DOMAIN/manifest.json"
+          jq --arg v "$version" '.version = $v' "$manifest" > manifest.tmp
+          mv manifest.tmp "$manifest"
+          echo "manifest.json version: $(jq -r .version "$manifest")"
+
+      - name: Build zip
+        run: |
+          cd "custom_components/$DOMAIN"
+          zip -r -X "$GITHUB_WORKSPACE/$DOMAIN.zip" . -x '*__pycache__*' '*.pyc'
+          unzip -l "$GITHUB_WORKSPACE/$DOMAIN.zip" | tail -n 1
+
+      - name: Attach zip to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" "$DOMAIN.zip" --clobber --repo "$GITHUB_REPOSITORY"

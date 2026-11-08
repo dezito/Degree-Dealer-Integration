@@ -1,5 +1,11 @@
 # Degree Dealer for Home Assistant
 
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/docs/faq/custom_repositories/)
+[![GitHub Release](https://img.shields.io/github/v/release/dezito/Degree-Dealer-Integration)](https://github.com/dezito/Degree-Dealer-Integration/releases)
+[![Downloads](https://img.shields.io/github/downloads/dezito/Degree-Dealer-Integration/total)](https://github.com/dezito/Degree-Dealer-Integration/releases)
+[![License](https://img.shields.io/github/license/dezito/Degree-Dealer-Integration)](LICENSE)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-support-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/dezito)
+
 District heating optimisation that only deals out the degrees that pay off.
 
 Degree Dealer aims to get as much heat as possible out of every litre of district heating water:
@@ -90,6 +96,12 @@ in the raw configuration editor.
 
 While a window or door in a room is open, the room pauses learning and does not decide the
 advice.
+
+## Support
+
+Degree Dealer is free and open source. If it saves you money or time, you can [buy me a coffee](https://buymeacoffee.com/dezito) to support further development. It is entirely optional: bug reports, feedback and stars on GitHub help just as much.
+
+<a href="https://buymeacoffee.com/dezito" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50"></a>
 
 ## License
 

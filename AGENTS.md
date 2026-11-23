@@ -102,3 +102,10 @@ Use the shared Windows test venv from `../ha-dev` (same pins as BattMind):
 ```powershell
 .\ha-dev\run_tests_windows.ps1 degree
 ```
+
+Keep test runs short (user decision). While fixing, run only the test files
+that cover the change (`'-n' '0'` for a single file); after a failure rerun
+only what failed (`--lf`, `-x` to stop at the first failure). Run the full
+suite once, after the last change and before reporting the task done: not
+after every fix or review round, and in a multi-agent task only once, by the
+main agent, not by each subagent. `--durations=25` shows the slowest tests.
